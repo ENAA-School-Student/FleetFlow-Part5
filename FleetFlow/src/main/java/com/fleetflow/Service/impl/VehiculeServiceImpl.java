@@ -57,7 +57,7 @@ public class VehiculeServiceImpl implements VehiculeService {
         return vehiculeRepository.findAll(pageable).map(this::toDto);
     }
 
-    // Méthodes utilitaires ajoutées pour les tests (alias pratiques)
+
     public List<VehiculeDto> getVehiculeByStatut(StatutVehicule statut) {
         return vehiculeMapper.toDto(vehiculeRepository.findByStatut(statut));
     }

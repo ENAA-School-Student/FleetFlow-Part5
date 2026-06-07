@@ -10,14 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Entité User - représente un utilisateur de l'application.
- *
- * Elle implémente UserDetails (interface de Spring Security) pour que
- * Spring Security puisse l'utiliser directement pour l'authentification.
- *
- * Les autres entités (Chauffeur, etc.) héritent de User si besoin.
- */
+
 @Entity
 @Table(name = "users")
 @Data

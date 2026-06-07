@@ -12,12 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Règles CHAUFFEUR :
- *  - GET  → ADMIN et MANAGER (peut consulter)
- *  - POST/PUT → ADMIN seulement (MANAGER ne peut pas créer/modifier)
- *  - DELETE → ADMIN seulement (défini dans SecurityConfig aussi)
- */
+
 @RestController
 @RequestMapping("/api/chauffeurs")
 @RequiredArgsConstructor
@@ -54,7 +49,7 @@ public class ChauffeurController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")  // Renforcé aussi dans SecurityConfig
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         chauffeurService.delete(id);
         return ResponseEntity.noContent().build();

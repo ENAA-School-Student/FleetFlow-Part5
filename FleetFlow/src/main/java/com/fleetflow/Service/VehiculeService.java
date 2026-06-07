@@ -14,7 +14,7 @@ public interface VehiculeService {
     void delete(Long id);
     Page<VehiculeDto> getAll(Pageable pageable);
 
-    // Méthodes utilitaires utilisées par les tests
+
     List<VehiculeDto> getVehiculeByStatut(StatutVehicule statut);
 
     List<VehiculeDto> getVehiculeCapaciteGreaterThan(int capacite);

@@ -26,7 +26,7 @@ jobs:
             -Dspring.profiles.active=test \
             -Djwt.secret=${{ secrets.JWT_SECRET }} \
             -Djwt.expiration=${{ secrets.JWT_EXPIRATION }}
-        working-directory: FleetFlow   # 
+        working-directory: FleetFlow   #
 
       - name: Save JAR
         if: success()

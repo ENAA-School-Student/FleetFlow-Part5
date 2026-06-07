@@ -20,6 +20,7 @@ public interface VehiculeMapper {
     List<VehiculeDto> toDto(List<Vehicule> vehicules);
 
     @Mapping(target = "id", ignore = true)
+
     void updateVehiculeDto(VehiculeDto dto,@MappingTarget Vehicule vehicule);
 
 

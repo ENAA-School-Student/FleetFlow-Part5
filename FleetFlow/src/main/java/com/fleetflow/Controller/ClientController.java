@@ -12,15 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Controller Client avec pagination, tri et contrôle des rôles.
- *
- * @PreAuthorize("hasAnyRole('ADMIN','MANAGER')") → seuls ADMIN et MANAGER ont accès
- *
- * Pagination via URL :
- *   GET /api/clients?page=0&size=5&sort=name,asc
- *   → page 0 (1ère page), 5 résultats, triés par nom ASC
- */
+@PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
+
 @RestController
 @RequestMapping("/api/clients")
 @RequiredArgsConstructor
@@ -28,10 +21,7 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    /**
-     * Liste paginée et triable de tous les clients.
-     * @PageableDefault définit les valeurs par défaut si non fournies dans l'URL.
-     */
+
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<Page<ClientDto>> getAll(
@@ -61,7 +51,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")  // Seul ADMIN peut supprimer
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         clientService.deleteClient(id);
         return ResponseEntity.noContent().build();

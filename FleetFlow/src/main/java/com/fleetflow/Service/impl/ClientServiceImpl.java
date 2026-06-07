@@ -9,15 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-/**
- * Implémentation du ClientService.
- *
- * Pagination : getAllClients(Pageable) reçoit un objet Pageable
- * qui contient : page, size, sort.
- * Spring Data JPA construit automatiquement la requête SQL paginée.
- *
- * Exemple d'appel : GET /api/clients?page=0&size=10&sort=name,asc
- */
+
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
@@ -58,18 +50,14 @@ public class ClientServiceImpl implements ClientService {
         return toDto(clientRepository.save(client));
     }
 
-    /**
-     * Retourne une Page<ClientDto>.
-     * Le Pageable est fourni par le controller via @PageableDefault ou les paramètres URL.
-     */
+
     @Override
     public Page<ClientDto> getAllClients(Pageable pageable) {
-        // findAll(Pageable) → Spring Data génère : SELECT * FROM client LIMIT ? OFFSET ? ORDER BY ?
+
         return clientRepository.findAll(pageable)
-                .map(this::toDto); // convertit chaque Client en ClientDto
+                .map(this::toDto);
     }
 
-    // ─── Mappers manuels (pas de MapStruct ici pour simplifier) ──────────
     private ClientDto toDto(Client c) {
         ClientDto dto = new ClientDto();
         dto.setId(c.getId());

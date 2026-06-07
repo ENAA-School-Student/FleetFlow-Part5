@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface LivraisonRepository extends JpaRepository<Livraison, Long> {
 
-    // Livraisons d'un chauffeur spécifique (utilisé par le rôle CHAUFFEUR)
+
     Page<Livraison> findByChauffeurId(Long chauffeurId, Pageable pageable);
 
     List<Livraison> findByStatut(StatutLivraison statut);

@@ -13,5 +13,4 @@ public interface ChauffeurMapper {
 
     List<ChauffeurDTO> toDTOs(List<Chauffeur> chauffeurs);
 
-//    void update(ChauffeurDTO dto, @MappingTarget Chauffeur entity);
 }

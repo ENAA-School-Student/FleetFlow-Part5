@@ -1,8 +1,7 @@
-version: '3.8'   # Version de Docker Compose
+version: '3.8'
 
-services:    # Liste des services (containers)
+services:
 
-  #  Base de données MySQL
 
   mysql:
     image: mysql:8.0
@@ -15,21 +14,21 @@ services:    # Liste des services (containers)
       MYSQL_PASSWORD: fleetflow123
 
     ports:
-      - "3306:3306"    # port_hote:port_conteneur
+      - "3306:3306"
 
     volumes:
-      - mysql_data:/var/lib/mysql    # Sauvegarde des données
+      - mysql_data:/var/lib/mysql
 
     networks:
       - fleetflow-network
 
-    healthcheck:   # Vérifie si MySQL est prêt
+    healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # Application Spring Boot
+
   fleetflow-api:
     build:
       context: .
@@ -55,7 +54,7 @@ services:    # Liste des services (containers)
     networks:
       - fleetflow-network
 
-# Réseau entre les conteneurs
+
 networks:
   fleetflow-network:
     driver: bridge

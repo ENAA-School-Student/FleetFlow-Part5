@@ -6,10 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-/**
- * DTO pour l'inscription d'un nouvel utilisateur.
- * Reçu dans le body de POST /api/auth/register
- */
+
 @Data
 public class RegisterRequest {
     @NotBlank

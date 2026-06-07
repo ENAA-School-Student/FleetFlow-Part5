@@ -40,7 +40,6 @@ public class ClientServiceTest {
                 .id(2L).name("Hiba").email("hiba@gmail.com")
                 .ville("CASA").telephone("0634567890").build();
 
-        // ✅ CORRIGÉ : existsByEmail au lieu de findByEmail
         when(clientRepository.existsByEmail(dto.getEmail())).thenReturn(false);
         when(clientRepository.save(any(Client.class))).thenReturn(savedClient);
 
@@ -55,7 +54,6 @@ public class ClientServiceTest {
         ClientDto dto = new ClientDto();
         dto.setEmail("sara@gmail.com");
 
-        // ✅ CORRIGÉ : existsByEmail
         when(clientRepository.existsByEmail(dto.getEmail())).thenReturn(true);
 
         assertThrows(RuntimeException.class, () -> clientService.addClient(dto));

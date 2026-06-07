@@ -11,14 +11,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-/**
- * Gestionnaire global des exceptions.
- * Retourne des réponses JSON propres plutôt que des stack traces.
- */
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Erreurs métier (entité non trouvée, email dupliqué, etc.)
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Map<String, Object>> handleRuntime(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
@@ -27,7 +24,7 @@ public class GlobalExceptionHandler {
         ));
     }
 
-    // Accès refusé (rôle insuffisant) → 403 Forbidden
+
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Map<String, Object>> handleAccessDenied(AccessDeniedException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of(
@@ -36,7 +33,7 @@ public class GlobalExceptionHandler {
         ));
     }
 
-    // Non authentifié → 401 Unauthorized
+
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Map<String, Object>> handleAuth(AuthenticationException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(

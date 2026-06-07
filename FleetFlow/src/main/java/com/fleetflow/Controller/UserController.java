@@ -9,16 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Controller de gestion des utilisateurs.
- * Accessible UNIQUEMENT par l'ADMIN.
- *
- * Note : la règle est aussi définie dans SecurityConfig pour double sécurité.
- */
+
+
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")  // Appliqué à TOUS les endpoints de ce controller
+@PreAuthorize("hasRole('ADMIN')")
+
 public class UserController {
 
     private final UserRepository userRepository;

@@ -40,7 +40,7 @@ public class LivraisonServiceImpl implements LivraisonService {
         return livraisonMapper.toDTO(livraisonRepository.save(entity));
     }
 
-    // Alias attendu par les tests
+
     public LivraisonDTO createLivraison(LivraisonDTO dto) {
         if (dto.getStatut() == null) dto.setStatut(StatutLivraison.ENATTENTE);
         return create(dto);
@@ -69,19 +69,14 @@ public class LivraisonServiceImpl implements LivraisonService {
         return livraisonRepository.findAll(pageable).map(livraisonMapper::toDTO);
     }
 
-    /**
-     * Utilisé par le rôle CHAUFFEUR pour voir UNIQUEMENT ses propres livraisons.
-     */
+
     @Override
     public Page<LivraisonDTO> getByChauffeur(Long chauffeurId, Pageable pageable) {
         return livraisonRepository.findByChauffeurId(chauffeurId, pageable)
                 .map(livraisonMapper::toDTO);
     }
 
-    /**
-     * Un CHAUFFEUR peut seulement changer le statut de ses livraisons,
-     * pas modifier le reste (client, véhicule, adresses...).
-     */
+
     @Override
     public LivraisonDTO updateStatut(Long id, StatutLivraison statut) {
         Livraison l = livraisonRepository.findById(id)
@@ -90,12 +85,10 @@ public class LivraisonServiceImpl implements LivraisonService {
         return livraisonMapper.toDTO(livraisonRepository.save(l));
     }
 
-    // Alias pour la nomination utilisée dans les tests
     public LivraisonDTO modifierStatut(Long id, StatutLivraison statut) {
         return updateStatut(id, statut);
     }
 
-    // Méthode d'assignation utilisée par les tests
     public LivraisonDTO assignerChauffeurEtVehicule(Long livraisonId, Long chauffeurId, Long vehiculeId) {
         Livraison l = livraisonRepository.findById(livraisonId)
                 .orElseThrow(() -> new RuntimeException("Livraison non trouvée : " + livraisonId));
@@ -108,7 +101,6 @@ public class LivraisonServiceImpl implements LivraisonService {
         l.setVehicule(v);
         l.setStatut(StatutLivraison.ENCOURS);
 
-        // mettre à jour disponibilité
         c.setDisponible(false);
         v.setStatut(StatutVehicule.EN_LIVRAISON);
 
@@ -119,7 +111,6 @@ public class LivraisonServiceImpl implements LivraisonService {
         return livraisonMapper.toDTO(l);
     }
 
-    // ─── Mappers ─────────────────────────────────────────────────────────
 
     private LivraisonDTO toDto(Livraison l) {
         LivraisonDTO dto = new LivraisonDTO();
