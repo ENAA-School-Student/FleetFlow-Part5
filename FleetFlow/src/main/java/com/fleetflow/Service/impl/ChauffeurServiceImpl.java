@@ -4,16 +4,20 @@ import com.fleetflow.Dto.ChauffeurDTO;
 import com.fleetflow.Entity.Chauffeur;
 import com.fleetflow.Repository.ChauffeurRepository;
 import com.fleetflow.Service.ChauffeurService;
+import com.fleetflow.Mapper.ChauffeurMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ChauffeurServiceImpl implements ChauffeurService {
 
     private final ChauffeurRepository chauffeurRepository;
+    private final ChauffeurMapper chauffeurMapper;
 
     @Override
     public ChauffeurDTO getById(Long id) {
@@ -49,6 +53,11 @@ public class ChauffeurServiceImpl implements ChauffeurService {
         return chauffeurRepository.findAll(pageable).map(this::toDto);
     }
 
+    @Override
+    public List<ChauffeurDTO> getChauffeursdisponibles() {
+        return chauffeurMapper.toDTOs(chauffeurRepository.findByDisponibleTrue());
+    }
+
     private ChauffeurDTO toDto(Chauffeur c) {
         ChauffeurDTO dto = new ChauffeurDTO();
         dto.setId(c.getId());
@@ -67,4 +76,6 @@ public class ChauffeurServiceImpl implements ChauffeurService {
                 .disponible(dto.getDisponible())
                 .build();
     }
+
+
 }

@@ -4,7 +4,7 @@ import com.fleetflow.Dto.VehiculeDto;
 import com.fleetflow.Entity.Vehicule;
 import com.fleetflow.Mapper.VehiculeMapper;
 import com.fleetflow.Repository.VehiculeRepository;
-import com.fleetflow.Service.VehiculeService;
+import com.fleetflow.Service.impl.VehiculeServiceImpl;
 import com.fleetflow.enums.StatutVehicule;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ public class ViheculeServiceTest {
     private VehiculeRepository vehiculeRepository;
 
     @InjectMocks
-    private VehiculeService vehiculeService;
+    private VehiculeServiceImpl vehiculeService;
 
     @Mock
     private VehiculeMapper vehiculeMapper;

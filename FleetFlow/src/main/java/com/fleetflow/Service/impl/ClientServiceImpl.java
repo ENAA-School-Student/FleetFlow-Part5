@@ -33,7 +33,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto addClient(ClientDto dto) {
-        if (clientRepository.findByEmail(dto.getEmail())) {
+        if (clientRepository.existsByEmail(dto.getEmail())) {
             throw new RuntimeException("Email déjà utilisé : " + dto.getEmail());
         }
         Client saved = clientRepository.save(toEntity(dto));

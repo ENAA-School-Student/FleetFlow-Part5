@@ -4,16 +4,21 @@ import com.fleetflow.Dto.VehiculeDto;
 import com.fleetflow.Entity.Vehicule;
 import com.fleetflow.Repository.VehiculeRepository;
 import com.fleetflow.Service.VehiculeService;
+import com.fleetflow.Mapper.VehiculeMapper;
+import com.fleetflow.enums.StatutVehicule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class VehiculeServiceImpl implements VehiculeService {
 
     private final VehiculeRepository vehiculeRepository;
+    private final VehiculeMapper vehiculeMapper;
 
     @Override
     public VehiculeDto getById(Long id) {
@@ -50,6 +55,15 @@ public class VehiculeServiceImpl implements VehiculeService {
     @Override
     public Page<VehiculeDto> getAll(Pageable pageable) {
         return vehiculeRepository.findAll(pageable).map(this::toDto);
+    }
+
+    // Méthodes utilitaires ajoutées pour les tests (alias pratiques)
+    public List<VehiculeDto> getVehiculeByStatut(StatutVehicule statut) {
+        return vehiculeMapper.toDto(vehiculeRepository.findByStatut(statut));
+    }
+
+    public List<VehiculeDto> getVehiculeCapaciteGreaterThan(int capacite) {
+        return vehiculeMapper.toDto(vehiculeRepository.findByCapaciteGreaterThan(capacite));
     }
 
     private VehiculeDto toDto(Vehicule v) {

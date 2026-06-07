@@ -17,4 +17,11 @@ public interface LivraisonService {
 
     // Pour le rôle CHAUFFEUR : mettre à jour uniquement le statut
     LivraisonDTO updateStatut(Long id, StatutLivraison statut);
+
+    // Aliases utilisés par les tests
+    LivraisonDTO createLivraison(LivraisonDTO dto);
+
+    LivraisonDTO assignerChauffeurEtVehicule(Long livraisonId, Long chauffeurId, Long vehiculeId);
+
+    LivraisonDTO modifierStatut(Long id, StatutLivraison statut);
 }

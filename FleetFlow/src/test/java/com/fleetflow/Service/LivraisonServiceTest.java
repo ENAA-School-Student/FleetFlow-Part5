@@ -5,6 +5,7 @@ import com.fleetflow.Entity.*;
 import com.fleetflow.enums.StatutLivraison;
 import com.fleetflow.enums.StatutVehicule;
 import com.fleetflow.Mapper.LivraisonMapper;
+import com.fleetflow.Service.impl.LivraisonServiceImpl;
 import com.fleetflow.Repository.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class LivraisonServiceTest {
     @Mock private LivraisonMapper livraisonMapper;
 
     @InjectMocks
-    private LivraisonService livraisonService;
+    private LivraisonServiceImpl livraisonService;
 
     @Test
     void creerLivraison_statutInitialEstEnAttente() {
